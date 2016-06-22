@@ -17,13 +17,14 @@ This project can be used to create a large training data, train the classifier a
 #### List of modules developed
 
 - Classification module ( 2 approaches, K-NN and decision tree)
-- Make Laptop as AP
 - Prioritization module (HTB)
+- Auto-labeling heuristics to create large training data
+- Make Laptop as AP
 - Configure the DHCP server
 
 #### Directory Structure
 - **doc**: Contains project documentation
-- **scripts**: Contains necessary scripts for the setup
+- **scripts**: Contains necessary scripts for the setup, classification and prioritization
 
 #### Contents ####
 - Scripts for various setups, classification and prioritization
@@ -31,10 +32,8 @@ This project can be used to create a large training data, train the classifier a
 - A [developer guide](docs/v1.0/README_Developer.md) which explains the structure of the scripts.
 
 #### Authors ####
-* [Hiren Patel](https://www.linkedin.com/in/hiren-patel-8b310283), Master's student (2014-2016), Dept. of Computer Science and Engineering, IIT Bombay.
-	
-* [Vidya Sagar Kushwaha](https://in.linkedin.com/in/vidya-sagar-kushwaha-a713a835), Master's student (2014-2016), Dept. of Computer Science and Engineering, IIT Bombay
-
+* [Hiren Patel](https://www.linkedin.com/in/hiren-patel-8b310283), Master's student (2014-2016), Dept. of Computer Science and Engineering, IIT Bombay.	
+* [Vidya Sagar Kushwaha](https://in.linkedin.com/in/vidya-sagar-kushwaha-a713a835), Master's student (2014-2016), Dept. of Computer Science and Engineering, IIT Bombay.
 * [Prof. Mythili Vutukuru](https://www.cse.iitb.ac.in/~mythili/), Dept. of Computer Science and Engineering, IIT Bombay.
 
 #### Contact Us 
