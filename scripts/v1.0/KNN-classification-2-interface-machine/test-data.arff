@@ -1,0 +1,13 @@
+@relation data
+@attribute 'Avg Packet Size' numeric
+@attribute 'Std. deviation of packet size' numeric
+@attribute 'Total Bytes' numeric
+@attribute 'AVG. IAT(ms)' numeric
+@attribute 'Std. daviation of IAT(ms)' numeric
+@attribute 'Flow duration(SECONDS)' numeric
+@attribute Push_flag_cnt numeric
+@attribute Avg_wind_size numeric
+@attribute Class {download,multimedia}
+@data
+
+1495,70,1495772,1.09,1.35,1.08450835,3,30015,download
