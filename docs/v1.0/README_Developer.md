@@ -17,7 +17,7 @@ Figure 1 shows the big picture of the whole process.
 <p align="center">Fig. 1: Overall classification process</p>
 
 
-First we collect traces, use some labeling mechanism to label the training flows. Then we select the minimal set of features which can classify the traffic with high accuracy. 
+First we collect traces, use some labeling mechanism to label the training flows. Then we select the minimal set of features which can classify the traffic with high accuracy.
 After this, we apply different ML algorithms to train the classifier which is further used in the real-time scenario.
 
 During real-time classification, inside an AP, traffic is captured live and then we calculate the flow related statistics (feature values) after certain pre-defined threshold point. Depending upon those feature values, the flow is classified as either multimedia or download. If it is classified as multimedia then that flow is prioritized immediately.
@@ -37,13 +37,13 @@ This directory contains 2 bash scripts which are executed on 2-interface machine
 2. **2interface.sh :** It is used to make a bridge between the two interfaces of the machine. It forwards all the packets from eth0 to eth1 interface and vice-versa.
 
 
-#### Module 2: DHCP 
+#### Module 2: DHCP
 This module configures the dhcp server on a machine. This module consists of 3 files.</br>
 1. **configure-dhcp-server.sh :** It makes the necessary changes in /etc/dhcp/dhcpd.conf and /etc/network/interfaces files to configure the ip-ranges and gateway etc.</br>
 2. **interfaces :** This file contains information about the gateway, netmask and other parameters.</br>
 3. **dhcpd.conf :** This file contains the defined ip-ranges that will be allotted by the dhcp server. You can make the necessary changes in this file as per requirement.</br>
 
-#### Module 3: Label-training-data 
+#### Module 3: Label-training-data
 This module is responsible for labelling the training data (trace files in pcap format).
 There are two sub directories.</br>
 
@@ -52,10 +52,10 @@ It does the labeling for multimedia trace files.</br>
 create-training-data-for-Multimedia.sh : It uses tshark command to fetch the required fields from each of the packets . It further invokes generate-list-of-port-with-GET-request.py, create-csv-with-flow-features.py and create-header.py to create a csv file which contains all the multimedia flows.
 	It also takes care of all those pcaps which do not have HTTP GET requests. You can read the comments in the scripts for more details.</br>
 
-		
+
 ##### for download-pcaps :
 It does the labeling for download files. </br>
-create-training-data-for-download.sh : It invokes create-csv-with-flow-features-download.py which contains manually defined threshold values for some of the feature values to filter out the download flows and put them in a csv file. You can change those threshold values as required. 
+create-training-data-for-download.sh : It invokes create-csv-with-flow-features-download.py which contains manually defined threshold values for some of the feature values to filter out the download flows and put them in a csv file. You can change those threshold values as required.
 
 #### Module 4:Configure-Laptop-as-AP
 This module consists of 3 files.</br>
@@ -63,8 +63,8 @@ This module consists of 3 files.</br>
 2. **make-ap.sh :** This script copies Laptop-AP file to /etc/NetworkManager/system-connections/ location and restarts network manager to create a wifi network with the SSID mentioned in Laptop-AP file.</br>
 3. **remove-ap.sh :** It will undo the changes made by the make-ap.sh script.</br>
 
-#### Module 5: DT-classification-2-interface-machine 
-This module contains scripts which are applied at 2-interface machine setup (see Fig. 2). 
+#### Module 5: DT-classification-2-interface-machine
+This module contains scripts which are applied at 2-interface machine setup (see Fig. 2).
 
 <div align="center">
 <img src="images/setup.png" alt="Fig. 2: 2-interface machine setup" width="750" height="430" />
@@ -73,7 +73,7 @@ This module contains scripts which are applied at 2-interface machine setup (see
 
 This does the decision tree based classification. It has following files.</br>
 1. **generate-decision-tree-model.sh :**   This script is used to generate decision tree model from the given training data.</br>
-2. **create-htb-queues.sh :** This script creates 3 bands and it has some tc filter rules which forward multimedia packets to high priority band. Fig. 3 shows the HTB bands and how we use iptables rules along with tc filter rules to put the multimedia flow packets in the prioritized band. After the classification script has identified a flow as multimedia, it applies an iptables rule which marks all the packets belonging to that flow as some particular number, say 5. 
+2. **create-htb-queues.sh :** This script creates 3 bands and it has some tc filter rules which forward multimedia packets to high priority band. Fig. 3 shows the HTB bands and how we use iptables rules along with tc filter rules to put the multimedia flow packets in the prioritized band. After the classification script has identified a flow as multimedia, it applies an iptables rule which marks all the packets belonging to that flow as some particular number, say 5.
 <div align="center">
 <img src="images/htp_prio_bands.png" alt="Fig. 3: HTB bands and Use of iptables and tc filter rules" width="800" height="320" />
 </div>
@@ -87,10 +87,9 @@ Now we have another tc filter rule which filters all the packets marked with num
 <p align="center">Fig. 4: Classification in live AP</p>
 
 Then we check if this flow has reached the threshold point (defined as some particular number of packets in a flow, in our case its first 1000 packets). If YES, then we call another function which calculates all the features values and then checks if this flow falls under multimedia class, depending on the if-else conditions, that were generated from the decision tree model.</br>
-If the flow gets classified as multimedia, then we use iptables command to prioritize that flow using the 4-tuple information (SIP,DIP,SP,DP). We put an iptables command to mark the flow as some particular number and then there is a tc filter which filters those marked packets and put them in the prioritized band.</br>
-4. **main-script.sh :**  This is the main script, and it invokes the above 2 scripts (Create-htb-queues.sh and classification-script-decision-tree.py). It also captures the traffic in pcap file using tcpdump and saves them locally, which will be further used to re-train the classifier.</br>
+If the flow gets classified as multimedia, then we use iptables command to prioritize that flow using the 4-tuple information (SIP,DIP,SP,DP). We put an iptables command to mark the flow as some particular number and then there is a tc filter which filters those marked packets and put them in the prioritized band.</br>4.  **main-script.sh :**  This is the main script, and it invokes the above 2 scripts (Create-htb-queues.sh and classification-script-decision-tree.py). It also captures the traffic in pcap file using tcpdump and saves them locally, which will be further used to re-train the classifier.</br>
 
-#### Module 6: DT-classification-on-laptop-AP 
+#### Module 6: DT-classification-on-laptop-AP
 This module is similar to module 5. The difference is that, here the classification is performed on the wlan0 interface of a laptop which is working as an AP.  In this case, we capture the packets at wlan0.(Fig. 5)</br>
 
 <div align="center">
@@ -103,7 +102,7 @@ This module contains 3 files: </br>
 2. decision-tree-classification-laptop-AP.py</br>
 3. main-script-laptop-AP.sh</br>
 
-#### Module 7: KNN-classification-2-interface-machine 
+#### Module 7: KNN-classification-2-interface-machine
 This module performs K-nearest neighbor based classification. It need weka tool to classify the flow using knn model. It contains following files.</br>
 1. **data.csv :**  This is the training file containing flows along with their feature values and label. </br>
 2. **generate-KNN-model.sh :** This script converts data.csv to a new file train-data.arff and Then it builds KNN model using this arff file.</br>
@@ -123,4 +122,3 @@ This module has 3 files.</br>
 1. **calculate-moss.py  :** In this script, we use equations from Pingplotter software page</br> (https://www.pingman.com/kb/article/how-is-mos-calculated-in-pingplotter-pro-50.html) to calculate the MOS score.</br>
 2. **Calculate-moss.sh :** This script calculates the number of tcp retransmission, number of duplicate acks, number of lost segments and number of fast retransmission. It invokes calculate-moss.py and pass these information to calculate the MOS score.</br>
 3. **Auto-calculate-mos.sh :** This script invokes calculate-moss.sh for each pcap file present in the current directory and finally creates a file ‘mos-scores.txt’ which contains the MOS scores of each pcap file.</br>
-
