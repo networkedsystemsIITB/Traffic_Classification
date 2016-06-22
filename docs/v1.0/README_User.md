@@ -1,6 +1,6 @@
-## Traffic Classification
+## Traffic Classification User's Guide
 
-The manual contains all the steps to setup the classification prioritization modules.
+The manual contains all the steps to setup the classification and prioritization modules.
 There are two setups in this work.</br>
 1. Using 2-interface machine and an access point (AP)</br>
 2. Using laptop as AP</br>
@@ -10,7 +10,7 @@ This setup is shown in the Fig. 1.
 
 It requires</br>
 1. One machine with 2 NICs (network interface cards) with Ubuntu 14.04</br>
-2. One machine which will act at DHCP server (Ubuntu 14.04)</br>
+2. One machine which will act at DHCP server with Ubuntu 14.04</br>
 3. One switch </br>
 4. One AP</br>
 5. User machines (clients)</br>
@@ -26,28 +26,28 @@ It requires</br>
 
 
 #### DHCP server ####
-1. Install the dhcp server (one time only)<br/>
+1. Install the dhcp server (one time only).<br/>
   ```
    $ sudo apt-get install isc-dhcp-server
   ```   
-2. Run the configure-dhcp-server.sh from the folder DHCP
+2. Run the configure-dhcp-server.sh from the folder DHCP.
   ```
   $ cd DHCP
   $ sudo bash configure-dhcp-server.sh
   ```
 
-	It will configure the ip-range etc in this machine which will be assigned to all the machines connected to the switch or AP.
+	It will configure the ip-range  in this machine which will be assigned to any machine which is connected to the switch or AP.
 
 #### 2-interface machine ####
 3.  Run the nat.sh and 2interface.sh from 2-interface-machine-files folder.</br>
   ```
-	$ cd 2-interface-machine-files
-	$ sudo bash nat.sh
-	$ sudo 2interface.sh
+	$ cd 2-interface-machine-files<br/>
+	$ sudo bash nat.sh<br/>
+	$ sudo 2interface.sh<br/>
   ```
 4. Run the main-script.sh from DT-classification-2-interface-machine folder.</br>
   ```
-  $ cd DT-classification-2-interface-machine
+  $ cd DT-classification-2-interface-machine<br/>
   $ sudo bash main-script.sh
   ```
 
