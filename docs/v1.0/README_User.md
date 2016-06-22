@@ -125,7 +125,7 @@ This script will show the logs on the screen. It will print the connection ID (4
 
 
 ### Trace collection and labeling training data ###
-This precoess is comman for both the setups.
+This process is common to both the setups.
 
 #### Trace collection ####
 As the classification algorithms we have used, require pre-labelled training data, you need to collect traces for both multimedia and download classes.
