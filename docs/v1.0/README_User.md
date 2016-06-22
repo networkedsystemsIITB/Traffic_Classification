@@ -42,7 +42,9 @@ It requires</br>
 3.  Run the nat.sh and 2interface.sh from 2-interface-machine-files folder.</br>
   ```
 	$ cd 2-interface-machine-files</br>
+
 	$ sudo bash nat.sh</br>
+  
 	$ sudo 2interface.sh</br>
   ```
 4. Run the main-script.sh from DT-classification-2-interface-machine folder.</br>
@@ -55,7 +57,7 @@ This is for decision tree based classification. It will classify the traffic int
 **Note** : </br>
 If you want to use K-NN algorithm approach then you need to run main-script.sh from KNN-classification-2-interface-machine folder.
 
-But before that you need to install weka on 2-interface machine. 
+But before that you need to install weka on 2-interface machine.
   ```
   $ cd
   $ wget https://sourceforge.net/projects/weka/files/weka-3-6/3.6.13/weka-3-6-13.zip/download -O weka-3-6-13.zip
