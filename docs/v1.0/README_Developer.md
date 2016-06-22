@@ -75,11 +75,6 @@ This does the decision tree based classification. It has following files.</br>
 1. **generate-decision-tree-model.sh :**   This script is used to generate decision tree model from the given training data.</br>
 2. **create-htb-queues.sh :** This script creates 3 bands and it has some tc filter rules which forward multimedia packets to high priority band. Fig. 3 shows the HTB bands and how we use iptables rules along with tc filter rules to put the multimedia flow packets in the prioritized band. After the classification script has identified a flow as multimedia, it applies an iptables rule which marks all the packets belonging to that flow as some particular number, say 5. Now we have another tc filter rule which filters all the packets marked with number 5 and then forwards them to high priority band. Thus multimedia flows get prioritized. There are some other parameters also, such as ceil, rate, etc., that you can change as per requirement (see the comments in the script for more details).
 
-<div align="center">
-<img src="images/htp_prio_bands.png" alt="Fig. 3: HTB bands and Use of iptables and tc filter rules" width="800" height="320" />
-</div>
-<p align="center">Fig. 3: HTB bands and Use of iptables and tc filter rules</p>
-
 3. **classification-script-decision-tree.py :** This script uses pcapy module to capture packet live, and process each packet one by one. (see Fig. 4) First it checks if the packet belongs to an existing flow. If NO, then it creates a new flow entry in the data structure and initializes other parameters. If that packet belongs to an existing flow, then the parameters of that flow get updated, such as packet count for the flow, inter-arrival times, etc. We maintain list of packet sizes, list of inter-arrival times and few other data structures for each flow.</br>
 
 <div align="center">
