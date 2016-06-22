@@ -41,20 +41,21 @@ It requires</br>
 #### 2-interface machine ####
 3.  Run the nat.sh and 2interface.sh from 2-interface-machine-files folder.</br>
   ```
-	$ cd 2-interface-machine-files<br/>
-	$ sudo bash nat.sh<br/>
-	$ sudo 2interface.sh<br/>
+	$ cd 2-interface-machine-files</br>
+	$ sudo bash nat.sh</br>
+	$ sudo 2interface.sh</br>
   ```
 4. Run the main-script.sh from DT-classification-2-interface-machine folder.</br>
   ```
-  $ cd DT-classification-2-interface-machine<br/>
+  $ cd DT-classification-2-interface-machine</br>
   $ sudo bash main-script.sh
   ```
 
 This is for decision tree based classification. It will classify the traffic into multimedia or download. If the tag is multimedia, then that flow is prioritized immediately.</br>
-**Note** : if you want to use K-NN algorithm approach then you need to run main-script.sh from KNN-classification-2-interface-machine folder.
+**Note** : </br>
+If you want to use K-NN algorithm approach then you need to run main-script.sh from KNN-classification-2-interface-machine folder.
 
-But before that you need to install weka on 2-interface machine. Here is the link to download
+But before that you need to install weka on 2-interface machine. 
   ```
   $ cd
   $ wget https://sourceforge.net/projects/weka/files/weka-3-6/3.6.13/weka-3-6-13.zip/download -O weka-3-6-13.zip
@@ -63,7 +64,7 @@ But before that you need to install weka on 2-interface machine. Here is the lin
   ```
 Now move to the KNN-classification-2-interface-machine directory and run the main script.
   ```
-  $ sudo bash main-script.sh
+  $ sudo bash main-script-KNN.sh
   ```
 This script will show the logs on the screen. It will print the connection ID (4-tuple : source IP, destination IP, source port, destination IP) along with the calculated feature values. It will also show the predicted tag by the classification model.
 
@@ -71,7 +72,7 @@ This script will show the logs on the screen. It will print the connection ID (4
 
 ### Setup 2 : Laptop AP
 
-In this case, we first make a laptop as AP, and then perform all the tasks in this laptop itself. See Fig. 2.
+In this case, we first make a laptop as AP and then perform all the tasks in this laptop itself. See Fig. 2.
 
 
 <div align="center">
@@ -80,7 +81,7 @@ In this case, we first make a laptop as AP, and then perform all the tasks in th
 <p align="center">Fig. 2: Laptop AP setup</p>
 
 
-Here eth0 interface of laptop is connected to wired network (Internet) and wlan0 works as access point. All the classification and prioritization takes place at wlan0 interface.
+Here eth0 interface of laptop is connected to wired network (Internet) and wlan0 works as access point. All the classification and prioritization take place at wlan0 interface.
 
 
 
@@ -114,7 +115,6 @@ Now, we have set up the laptop as AP. </br>
   $ sudo apt-get update
   $ sudo apt-get install python-pcapy
    ```
-
 2. Go to the ‘DT-classification-on-laptop-AP’ directory and run main-script-laptop-AP.sh </br>
    ```
   $ cd DT-classification-on-laptop-AP
@@ -123,7 +123,7 @@ Now, we have set up the laptop as AP. </br>
 This script will show the logs on the screen. It will print the connection ID (4-tuple : source IP, destination IP, source port, destination IP) along with the calculated feature values. It will also show the predicted tag by the classification model.
 
 
-#### Trace collection and labeling training data ####
+### Trace collection and labeling training data ###
 This precoess is comman for both the setups.
 
 #### Trace collection ####
