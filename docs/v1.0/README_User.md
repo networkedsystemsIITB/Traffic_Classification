@@ -116,8 +116,9 @@ Now, we have set up the laptop as AP. </br>
 1. Install python pcapy module (if not already installed)</br>
    ```
   $ sudo apt-get update
-  $ sudo apt-get install python-pcapy</br>
+  $ sudo apt-get install python-pcapy
    ```
+</br>   
 2. Go to the ‘DT-classification-on-laptop-AP’ directory and run main-script-laptop-AP.sh. </br>
    ```
   $ cd DT-classification-on-laptop-AP
