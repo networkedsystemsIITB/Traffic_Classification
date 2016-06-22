@@ -139,7 +139,7 @@ Move all the multimedia pcap files to Label-training-data/for-multimedia-pcaps d
    ```
    $ bash create-training-data-for-Multimedia.sh
    ```
-It will generate a csv file with name as ‘all-multimedia-flows.csv’ .
+It will generate a csv file with name as ‘all-multimedia-flows.csv’.
 This csv file contains all the multimedia flows along with their feature values.
 
 
@@ -153,7 +153,7 @@ This csv file contains all the download flows along with their feature values.
 
 Now you need to merge this two csv files so that we have a combined csv file having all the flows. Don’t forget to remove extra header line that you get after merging these two csv files.
 
-Now we have two options:</br>
+Now you can build two models:</br>
 1. KNN model</br>
 2. Decision tree model</br>
 
@@ -170,4 +170,4 @@ Now we have two options:</br>
    ```
    $ bash generate-decision-tree-model.sh
    ```
-Above command will generate decision tree rules in hierarchical way, which can be implemented as if-else rules in classification script (classification-script-decision-tree.py) in the same directory.
+Above command will generate decision tree rules in hierarchical way, which can be implemented as if-else rules in the classification script (classification-script-decision-tree.py) in the same directory.
