@@ -41,15 +41,16 @@ It requires</br>
 #### 2-interface machine ####
 3.  Run the nat.sh and 2interface.sh from 2-interface-machine-files folder.</br>
   ```
-	$ cd 2-interface-machine-files</br>
+	$ cd 2-interface-machine-files
 
-	$ sudo bash nat.sh</br>
-  
-	$ sudo 2interface.sh</br>
+	$ sudo bash nat.sh
+
+	$ sudo 2interface.sh
   ```
 4. Run the main-script.sh from DT-classification-2-interface-machine folder.</br>
   ```
-  $ cd DT-classification-2-interface-machine</br>
+  $ cd DT-classification-2-interface-machine
+
   $ sudo bash main-script.sh
   ```
 
