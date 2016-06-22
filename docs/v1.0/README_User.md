@@ -118,7 +118,6 @@ Now, we have set up the laptop as AP. </br>
 2. Go to the ‘DT-classification-on-laptop-AP’ directory and run main-script-laptop-AP.sh. </br>
    ```
   $ cd DT-classification-on-laptop-AP
-
   $ sudo bash main-script-laptop-AP.sh
    ```
 This script will show the logs on the screen. It will print the connection ID (4-tuple : source IP, destination IP, source port, destination IP) along with the calculated feature values. It will also show the predicted tag by the classification model.
