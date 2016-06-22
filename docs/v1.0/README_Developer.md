@@ -77,14 +77,14 @@ This does the decision tree based classification. It has following files.</br>
 
 
 <div align="center">
-<img src="images/htp_prio_bands.png" alt="Fig. 3: HTB bands and Use of iptables and tc filter rules" width="700" height="500" />
+<img src="images/htp_prio_bands.png" alt="Fig. 3: HTB bands and Use of iptables and tc filter rules" width="800" height="450" />
 </div>
 <p align="center">Fig. 3: HTB bands and Use of iptables and tc filter rules</p>
 
 3. **classification-script-decision-tree.py :** This script uses pcapy module to capture packet live, and process each packet one by one. (see Fig. 4) First it checks if the packet belongs to an existing flow. If NO, then it creates a new flow entry in the data structure and initializes other parameters. If that packet belongs to an existing flow, then the parameters of that flow get updated, such as packet count for the flow, inter-arrival times, etc. We maintain list of packet sizes, list of inter-arrival times and few other data structures for each flow.</br>
 
 <div align="center">
-<img src="images/live-classification.png" alt="Fig. 4: Classification in live AP" width="850" height="650" />
+<img src="images/live-classification.png" alt="Fig. 4: Classification in live AP" width="650" height="820" />
 </div>
 <p align="center">Fig. 4: Classification in live AP</p>
 
