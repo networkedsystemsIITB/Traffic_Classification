@@ -78,7 +78,7 @@ This does the decision tree based classification. It has following files.</br>
 <img src="images/htp_prio_bands.png" alt="Fig. 3: HTB bands and Use of iptables and tc filter rules" width="800" height="320" />
 </div>
 <p align="center">Fig. 3: HTB bands and Use of iptables and tc filter rules</p>
-Now we have another tc filter rule which filters all the packets marked with number 5 and then forwards them to high priority band. Thus multimedia flows get prioritized. There are some other parameters also, such as ceil, rate, etc., that you can change as per requirement (see the comments in the script for more details).
+Now we have another tc filter rule which filters all the packets marked with number 5 and then forwards them to high priority band. Thus multimedia flows get prioritized. There are some other parameters also, such as ceil, rate, etc., that you can change as per requirement (see the comments in the script for more details).</br>
 3. **classification-script-decision-tree.py :** This script uses pcapy module to capture packet live, and process each packet one by one. (see Fig. 4) First it checks if the packet belongs to an existing flow. If NO, then it creates a new flow entry in the data structure and initializes other parameters. If that packet belongs to an existing flow, then the parameters of that flow get updated, such as packet count for the flow, inter-arrival times, etc. We maintain list of packet sizes, list of inter-arrival times and few other data structures for each flow.</br>
 
 <div align="center">
