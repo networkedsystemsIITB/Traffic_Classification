@@ -113,7 +113,6 @@ This will remove the changes made to the laptop.
 
 **Classification and Prioritization**</br>
 Now, we have set up the laptop as AP. </br>
-
 1. Install python pcapy module (if not already installed)</br>
    ```
   $ sudo apt-get update
