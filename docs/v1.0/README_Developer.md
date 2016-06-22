@@ -77,7 +77,7 @@ This does the decision tree based classification. It has following files.</br>
 
 
 <div align="center">
-<img src="images/htp_prio_bands.png" alt="Fig. 3: HTB bands and Use of iptables and tc filter rules" width="800" height="450" />
+<img src="images/htp_prio_bands.png" alt="Fig. 3: HTB bands and Use of iptables and tc filter rules" width="800" height="250" />
 </div>
 <p align="center">Fig. 3: HTB bands and Use of iptables and tc filter rules</p>
 
