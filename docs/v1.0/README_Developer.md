@@ -79,18 +79,18 @@ This does the decision tree based classification. It has following files.</br>
 </div>
 <p align="center">Fig. 3: HTB bands and Use of iptables and tc filter rules</p>
 Now we have another tc filter rule which filters all the packets marked with number 5 and then forwards them to high priority band. Thus multimedia flows get prioritized. There are some other parameters also, such as ceil, rate, etc., that you can change as per requirement (see the comments in the script for more details).</br>
-3. **classification-script-decision-tree.py :** This script uses pcapy module to capture packet live, and process each packet one by one. (see Fig. 4) First it checks if the packet belongs to an existing flow. If NO, then it creates a new flow entry in the data structure and initializes other parameters. If that packet belongs to an existing flow, then the parameters of that flow get updated, such as packet count for the flow, inter-arrival times, etc. We maintain list of packet sizes, list of inter-arrival times and few other data structures for each flow.</br>
+3. **classification-script-decision-tree.py :** This script uses pcapy module to capture packet live, and process each packet one by one (see Fig. 4). First it checks if the packet belongs to an existing flow. If not, then it creates a new flow entry in the data structure and initializes other parameters. If that packet belongs to an existing flow, then the parameters of that flow get updated, such as packet count for the flow, inter-arrival times, etc. We maintain list of packet sizes, list of inter-arrival times and few other data structures for each flow.</br>
 
 <div align="center">
 <img src="images/live-classification.png" alt="Fig. 4: Classification in live AP" width="650" height="820" />
 </div>
 <p align="center">Fig. 4: Classification in live AP</p>
 
-Then we check if this flow has reached the threshold point (defined as some particular number of packets in a flow, in our case its first 1000 packets). If YES, then we call another function which calculates all the features values and then checks if this flow falls under multimedia class, depending on the if-else conditions, that were generated from the decision tree model.</br>
-If the flow gets classified as multimedia, then we use iptables command to prioritize that flow using the 4-tuple information (SIP,DIP,SP,DP). We put an iptables command to mark the flow as some particular number and then there is a tc filter which filters those marked packets and put them in the prioritized band.</br>4.  **main-script.sh :**  This is the main script, and it invokes the above 2 scripts (Create-htb-queues.sh and classification-script-decision-tree.py). It also captures the traffic in pcap file using tcpdump and saves them locally, which will be further used to re-train the classifier.</br>
+Then we check if this flow has reached the threshold point (defined as some particular number of packets - N in a flow, in our case its first N=1000 packets). If YES, then we call another function which calculates all the features values and then checks if this flow falls under multimedia class, depending on the if-else conditions, that were generated from the decision tree model.</br>
+If the flow gets classified as multimedia, then we use iptables command to prioritize that flow using the 4-tuple information (SIP,DIP,SP and DP). We put an iptables command to mark the flow as some particular number and then there is a tc filter which filters those marked packets and put them in the prioritized band.</br>4.  **main-script.sh :**  This is the main script. It invokes the above 2 scripts (create-htb-queues.sh and classification-script-decision-tree.py). It also captures the traffic in pcap file using tcpdump and saves them locally, which will be further used to re-train the classifier.</br>
 
 #### Module 6: DT-classification-on-laptop-AP
-This module is similar to module 5. The difference is that, here the classification is performed on the wlan0 interface of a laptop which is working as an AP.  In this case, we capture the packets at wlan0.(Fig. 5)</br>
+This module is similar to module 5. The difference is that, here the classification is performed on the wlan0 interface of a laptop which is working as an AP.  In this case, we capture the packets at wlan0 (see Fig. 5).</br>
 
 <div align="center">
 <img src="images/laptop-AP-setup.png" alt="Fig. 5: Laptop-AP setup" width="900" height="500" />
@@ -103,22 +103,22 @@ This module contains 3 files: </br>
 3. main-script-laptop-AP.sh</br>
 
 #### Module 7: KNN-classification-2-interface-machine
-This module performs K-nearest neighbor based classification. It need weka tool to classify the flow using knn model. It contains following files.</br>
+This module performs K-nearest neighbor based classification. It needs weka tool to classify the flow using knn model. It contains following files.</br>
 1. **data.csv :**  This is the training file containing flows along with their feature values and label. </br>
-2. **generate-KNN-model.sh :** This script converts data.csv to a new file train-data.arff and Then it builds KNN model using this arff file.</br>
+2. **generate-KNN-model.sh :** This script converts data.csv to a new file train-data.arff and then it builds KNN model using this arff file.</br>
 3. **knn.model :**  This is the knn model which is passed to weka to predict the tag of the test flow.</br>
-4. **test-data.arff :**  This file contains exactly one entry, .i.e., the feature values of the flow which we are going to classify.</br>
-5. **call-weka-and-find-tag.sh :** It uses the exising KNN model (knn.model file) and the test instance (test-data.arff) and invokes KNN algorithm to predict the tag for the flow in test-data.arff.</br>
-6. **Create-htb-queues.sh :**  This script creates 3 bands and also sets different parameters.</br>
-7. **Knn-classification-script.py :**  This script captures packets live, calculate feature values for the flow (similar to the script in module 5). It creates the test-instance (test-data.arff file) and then invokes call-weka-and-find-tag.sh to get the predicted tag for it. It further does the prioritization if the flow is tagged as multimedia using the iptables and tc filter rules.</br>
-8. **main-script-KNN.sh :** This script invokes create-htb-queues.sh and knn-classification-script.py . It also captures the traffic in pcap file using tcpdump and saves them locally, which will be further used to re-train the classifier.</br>
+4. **test-data.arff :**  This file contains exactly one entry, i.e., the feature values of the flow which we will classify.</br>
+5. **call-weka-and-find-tag.sh :** It uses the exising KNN model (knn.model file) and the test instance (test-data.arff) and invokes KNN algorithm to predict the tag for the flow written in test-data.arff.</br>
+6. **create-htb-queues.sh :**  This script creates 3 bands and also sets different parameters.</br>
+7. **knn-classification-script.py :**  This script captures packets live, calculate feature values for the flow (similar to the script in module 5). It creates the test-instance (test-data.arff file) and then invokes call-weka-and-find-tag.sh to get the predicted tag for it. It further does the prioritization if the flow is tagged as multimedia using the iptables and tc filter rules.</br>
+8. **main-script-KNN.sh :** This script invokes create-htb-queues.sh and knn-classification-script.py. It also captures the traffic in pcap file using tcpdump and saves them locally, which will be further used to re-train the classifier.</br>
 
 
 #### Module 8: MOS-calculation-scripts
-This module is used when we want to test the quality of the multimedia streaming. MOS score is based on features such as packet loss, latency and jitter. To calculate the MOS score, first we need to capture the trace (pcap file) on the client machine, while we do the multimedia streaming. </br>
+This module is used when we want to test the quality of the multimedia streaming. MOS score is based on the features such as packet loss, latency and jitter. To calculate the MOS score, first we need to capture the trace (pcap file) on the client machine, while we do the multimedia streaming. </br>
 Now move all the pcaps to the directory MOS-calculation-scripts. You need to simply run the auto-calculate-mos.sh script.
 
 This module has 3 files.</br>
 1. **calculate-moss.py  :** In this script, we use equations from Pingplotter software page</br> (https://www.pingman.com/kb/article/how-is-mos-calculated-in-pingplotter-pro-50.html) to calculate the MOS score.</br>
-2. **Calculate-moss.sh :** This script calculates the number of tcp retransmission, number of duplicate acks, number of lost segments and number of fast retransmission. It invokes calculate-moss.py and pass these information to calculate the MOS score.</br>
-3. **Auto-calculate-mos.sh :** This script invokes calculate-moss.sh for each pcap file present in the current directory and finally creates a file ‘mos-scores.txt’ which contains the MOS scores of each pcap file.</br>
+2. **calculate-moss.sh :** This script calculates the number of tcp retransmission, number of duplicate acks, number of lost segments and number of fast retransmission. It invokes calculate-moss.py and pass these informations to calculate the MOS score.</br>
+3. **auto-calculate-mos.sh :** This script invokes calculate-moss.sh for each pcap file present in the current directory and finally creates a file ‘mos-scores.txt’ which contains the MOS scores of each pcap file.</br>
