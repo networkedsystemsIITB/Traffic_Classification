@@ -27,6 +27,7 @@ This project can be used to create a large training data, train the classifier a
 - **scripts**: Contains necessary scripts for the setup, classification and prioritization.
 
 #### Contents ####
+- A [Detailed Report](docs/v1.0/Traffic_classification.pdf) containing an explanation our work in detail. 
 - Scripts for various setups, classification and prioritization.
 - A [user guide](docs/v1.0/README_User.md) containing the setup and installation instructions.
 - A [developer guide](docs/v1.0/README_Developer.md) which explains the structure of the scripts.
